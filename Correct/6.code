@@ -1,0 +1,23 @@
+program
+	ref x;
+	ref y;
+	A(ref r, s) { 
+		x=0; 
+		y=0; 
+	}
+begin
+	x=new class;
+	y=new class;
+	x=1;
+	y=1;
+	if x==y then {
+		ref a, b;
+		a=new class;
+		a=5;
+		b=new class;
+		b=5;
+		begin A(a, b);
+	}
+	output(x);
+	output(y);
+end

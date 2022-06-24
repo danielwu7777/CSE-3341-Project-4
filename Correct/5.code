@@ -1,0 +1,16 @@
+program
+	A(ref r, s) { 
+		r=0; 
+		s=0; 
+	}
+	ref x;
+	ref y;
+begin
+	x=new class;
+	y=new class;
+	x=1;
+	y=1;
+	begin A(x, y);
+	output(x);
+	output(y);
+end

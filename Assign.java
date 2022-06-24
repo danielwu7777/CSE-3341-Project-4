@@ -3,7 +3,7 @@ class Assign implements Stmt {
 	Id assignTo;
 	Id assignFrom;
 	Expr expr;
-	
+
 	public void parse() {
 		assignTo = new Id();
 		assignTo.parse();
@@ -34,9 +34,9 @@ class Assign implements Stmt {
 		Parser.expectedToken(Core.SEMICOLON);
 		Parser.scanner.nextToken();
 	}
-	
+
 	public void print(int indent) {
-		for (int i=0; i<indent; i++) {
+		for (int i = 0; i < indent; i++) {
 			System.out.print("\t");
 		}
 		assignTo.print();
@@ -53,7 +53,7 @@ class Assign implements Stmt {
 		}
 		System.out.println(";");
 	}
-	
+
 	public void execute() {
 		if (type == 0) {
 			// Doing an "input"-assign
@@ -70,6 +70,3 @@ class Assign implements Stmt {
 		}
 	}
 }
-
-
-

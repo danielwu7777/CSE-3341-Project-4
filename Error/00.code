@@ -1,0 +1,9 @@
+program
+	A(ref r) { }
+	ref x;
+begin
+	x=new class;
+	x=1;
+	begin A(x);
+	output(4);
+end

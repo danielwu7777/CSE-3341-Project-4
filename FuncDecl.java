@@ -19,14 +19,18 @@ class FuncDecl {
         ss = new StmtSeq();
         ss.parse();
         Parser.expectedToken(Core.RBRACE);
+        Parser.scanner.nextToken();
     }
 
-    void print() {
+    void print(int indent) {
         id.print();
         System.out.print("(ref ");
         formals.print();
         System.out.println(") {");
-        ss.print(1);
+        ss.print(indent);
         System.out.println("}");
+    }
+
+    void execute() {
     }
 }

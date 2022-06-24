@@ -1,8 +1,8 @@
-class FuncCall {
+class FuncCall implements Stmt {
     Id id;
     Formals formals;
 
-    void parse() {
+    public void parse() {
         Parser.expectedToken(Core.BEGIN);
         Parser.scanner.nextToken();
         id = new Id();
@@ -17,11 +17,18 @@ class FuncCall {
         Parser.scanner.nextToken();
     }
 
-    void print() {
+    public void print(int indent) {
+        for (int i = 0; i < indent; i++) {
+            System.out.print("\t");
+        }
         System.out.print("begin ");
         id.print();
         System.out.print("(");
         formals.print();
         System.out.println(");");
+    }
+
+    public void execute() {
+        // TODO Auto-generated method stub
     }
 }

@@ -1,9 +1,7 @@
-import java.util.*;
-
 class Program {
 	DeclSeq ds;
 	StmtSeq ss;
-	
+
 	void parse() {
 		Parser.expectedToken(Core.PROGRAM);
 		Parser.scanner.nextToken();
@@ -19,7 +17,7 @@ class Program {
 		Parser.scanner.nextToken();
 		Parser.expectedToken(Core.EOS);
 	}
-	
+
 	void print() {
 		System.out.println("program");
 		if (ds != null) {
@@ -29,7 +27,7 @@ class Program {
 		ss.print(1);
 		System.out.println("end");
 	}
-	
+
 	void execute(String dataFileName) {
 		Executor.initialize(dataFileName);
 		if (ds != null) {
