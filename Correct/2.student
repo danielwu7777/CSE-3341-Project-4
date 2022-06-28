@@ -9,4 +9,3 @@ begin
 	begin A(x);
 	output(x);
 end
-1

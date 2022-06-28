@@ -8,4 +8,3 @@ begin
 	x=1;
 	output(4);
 end
-4

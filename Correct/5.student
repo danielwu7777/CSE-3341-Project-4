@@ -14,5 +14,3 @@ begin
 	output(x);
 	output(y);
 end
-1
-1

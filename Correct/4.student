@@ -17,5 +17,3 @@ begin
 	output(x);
 	output(y);
 end
-10
-5

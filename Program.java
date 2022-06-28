@@ -17,7 +17,7 @@ class Program {
 		Parser.scanner.nextToken();
 		Parser.expectedToken(Core.EOS);
 	}
-
+	/* 
 	void print() {
 		System.out.println("program");
 		if (ds != null) {
@@ -26,7 +26,7 @@ class Program {
 		System.out.println("begin");
 		ss.print(1);
 		System.out.println("end");
-	}
+	} */
 
 	void execute(String dataFileName) {
 		Executor.initialize(dataFileName);
