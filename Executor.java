@@ -3,7 +3,7 @@ import java.util.*;
 class CoreVar {
 	Core type;
 	Integer value;
-	
+
 	public CoreVar(Core varType) {
 		type = varType;
 		if (type == Core.INT) {
@@ -15,28 +15,47 @@ class CoreVar {
 }
 
 class Executor {
-	
+
 	static HashMap<String, CoreVar> globalSpace;
-	static Stack<HashMap<String, CoreVar>> stackSpace;
+	static Stack<Stack<HashMap<String, CoreVar>>> stackSpace;
 	static ArrayList<Integer> heapSpace;
-	
+	static HashMap<String, FuncDecl> functionMap;
+
 	static Scanner dataFile;
-	
+
 	static void initialize(String dataFileName) {
 		globalSpace = new HashMap<String, CoreVar>();
-		stackSpace = new Stack<HashMap<String, CoreVar>>();
+		stackSpace = new Stack<Stack<HashMap<String, CoreVar>>>();
 		heapSpace = new ArrayList<Integer>();
 		dataFile = new Scanner(dataFileName);
+		stackSpace = new Stack<Stack<HashMap<String, CoreVar>>>();
+		functionMap = new HashMap<String, FuncDecl>();
 	}
-	
-	static void pushLocalScope() {
-		stackSpace.push(new HashMap<String, CoreVar>());
+
+	static void addFunction(String funcName, FuncDecl funcDecl) {
+		functionMap.put(funcName, funcDecl);
 	}
-	
-	static void popLocalScope() {
+
+	static FuncDecl getFunction(String funcName) {
+		return functionMap.get(funcName);
+	}
+
+	static void pushStackSpace() {
+		stackSpace.push(new Stack<HashMap<String, CoreVar>>());
+	}
+
+	static void popStackSpace() {
 		stackSpace.pop();
 	}
-	
+
+	static void pushLocalScope() {
+		stackSpace.peek().push(new HashMap<String, CoreVar>());
+	}
+
+	static void popLocalScope() {
+		stackSpace.peek().pop();
+	}
+
 	static int getNextData() {
 		int data = 0;
 		if (dataFile.currentToken() == Core.EOS) {
@@ -48,22 +67,22 @@ class Executor {
 		}
 		return data;
 	}
-	
+
 	static void allocate(String identifier, Core varType) {
 		CoreVar record = new CoreVar(varType);
 		// If we are in the DeclSeq, the local scope will not be created yet
-		if (stackSpace.size()==0) {
+		if (stackSpace.size() == 0) {
 			globalSpace.put(identifier, record);
 		} else {
-			stackSpace.peek().put(identifier, record);
+			stackSpace.peek().peek().put(identifier, record);
 		}
 	}
-	
+
 	static CoreVar getStackOrStatic(String identifier) {
 		CoreVar record = null;
-		for (int i=stackSpace.size() - 1; i>=0; i--) {
-			if (stackSpace.get(i).containsKey(identifier)) {
-				record = stackSpace.get(i).get(identifier);
+		for (int i = stackSpace.size() - 1; i >= 0; i--) {
+			if (stackSpace.peek().get(i).containsKey(identifier)) {
+				record = stackSpace.peek().get(i).get(identifier);
 				break;
 			}
 		}
@@ -72,7 +91,7 @@ class Executor {
 		}
 		return record;
 	}
-	
+
 	static void heapAllocate(String identifier) {
 		CoreVar x = getStackOrStatic(identifier);
 		if (x.type != Core.REF) {
@@ -82,12 +101,12 @@ class Executor {
 		x.value = heapSpace.size();
 		heapSpace.add(null);
 	}
-	
+
 	static Core getType(String identifier) {
 		CoreVar x = getStackOrStatic(identifier);
 		return x.type;
 	}
-	
+
 	static Integer getValue(String identifier) {
 		CoreVar x = getStackOrStatic(identifier);
 		Integer value = x.value;
@@ -101,7 +120,7 @@ class Executor {
 		}
 		return value;
 	}
-	
+
 	static void storeValue(String identifier, int value) {
 		CoreVar x = getStackOrStatic(identifier);
 		if (x.type == Core.REF) {
@@ -115,7 +134,7 @@ class Executor {
 			x.value = value;
 		}
 	}
-	
+
 	static void referenceCopy(String var1, String var2) {
 		CoreVar x = getStackOrStatic(var1);
 		CoreVar y = getStackOrStatic(var2);
