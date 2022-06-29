@@ -32,6 +32,7 @@ class FuncDecl {
     }
 
     void execute() { // NOT SURE IF CORRECT
+        Executor.functionMap.put("string", FuncDecl.this); // like this
         id.executeRefAllocate();
         formals.execute();
         ss.execute();

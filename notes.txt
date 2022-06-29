@@ -1,0 +1,12 @@
+
+add frame for main at the start (before executing stmtSeq)
+
+example code 4:
+
+save into funcDecl map when executing funcDecl 
+    in FuncDecl.java, use self to refer to funcDecl
+
+don't push the new frame in function call immediately, create it separately
+    copy ref variables into newly created frame(stack of maps) - (get info from FuncDecl.formals and FuncDecl.stmtSeq)
+    then push on top of stack
+    then execute stmtSeq

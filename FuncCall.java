@@ -29,6 +29,15 @@ class FuncCall implements Stmt {
     }
 
     public void execute() { // NOT SURE WHAT TO DO HERE
+        // Set up new frame
+            // Create a stack of maps
+            // add a map to newly created stack of maps
+            // create the formal parameters, copying the values of the arguments
+            // push fram onto the top of stack of stack of maps
+        
+        // execute body of function
+
+        // pop frame off call stack
         Executor.pushStackSpace();
         FuncDecl fd = Executor.functionMap.get(id.getString());
         fd.execute();
