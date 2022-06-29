@@ -1,12 +1,1 @@
-program
-	A(ref r) {
-	if r<9 then {
-		r=input();
-		begin A(r);
-	}
-}
-		ref x;
-begin
-	x=new class;
-	x=10;
-end
+ERROR: invalid heap read attempted!

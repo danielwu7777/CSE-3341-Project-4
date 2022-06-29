@@ -1,13 +1,11 @@
 class FuncCall implements Stmt {
     Id id;
-    String identifier;
     Formals formals;
 
     public void parse() {
         Parser.expectedToken(Core.BEGIN);
         Parser.scanner.nextToken();
         id = new Id();
-        identifier = Parser.scanner.getID();
         id.parse();
         Parser.expectedToken(Core.LPAREN);
         Parser.scanner.nextToken();
@@ -32,7 +30,7 @@ class FuncCall implements Stmt {
 
     public void execute() { // NOT SURE WHAT TO DO HERE
         Executor.pushStackSpace();
-        FuncDecl fd = Executor.functionMap.get(identifier);
+        FuncDecl fd = Executor.functionMap.get(id.getString());
         fd.execute();
         Executor.popStackSpace();
     }

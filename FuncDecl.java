@@ -1,12 +1,10 @@
 class FuncDecl {
     Id id;
-    String identifier;
     Formals formals;
     StmtSeq ss;
 
     void parse() {
         id = new Id();
-        identifier = Parser.scanner.getID();
         id.parse();
         Parser.expectedToken(Core.LPAREN);
         Parser.scanner.nextToken();

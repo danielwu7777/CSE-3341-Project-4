@@ -1,11 +1,1 @@
-program
-	A(ref r) {
-	r=0;
-}
-		ref x;
-begin
-	x=new class;
-	x=1;
-	begin A(x);
-	output(x);
-end
+ERROR: invalid heap write attempted!
