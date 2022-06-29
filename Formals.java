@@ -21,6 +21,10 @@ class Formals {
     }
 
     void execute() {
+        id.executeRefAllocate();
+        if (formals != null) {
+            formals.execute();
+        }
     }
 
 }

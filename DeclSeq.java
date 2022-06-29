@@ -31,10 +31,11 @@ class DeclSeq {
 		}
 	}
 
-	void execute() {
+	void execute() { // Figure out how to add func-decl to map
 		if (decl != null) {
 			decl.execute();
 		} else {
+
 			fd.execute();
 		}
 		if (ds != null) {
