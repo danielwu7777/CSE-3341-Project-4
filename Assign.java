@@ -66,8 +66,6 @@ class Assign implements Stmt {
 			assignTo.referenceCopy(assignFrom);
 		} else {
 			// Doing a regular assign
-			System.out.println(Executor.globalSpace.toString()); //////////////////////////////////////////////////////
-			System.out.println(Executor.heapSpace.toString());
 			assignTo.storeValue(expr.execute());
 		}
 	}

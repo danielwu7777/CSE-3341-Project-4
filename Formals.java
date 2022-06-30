@@ -4,7 +4,7 @@ import java.util.List;
 class Formals {
     Id id;
     Formals formals;
-    List<String> listFormal = new ArrayList<String>();
+    List<Id> listFormal = new ArrayList<Id>();
 
     void parse() {
         id = new Id();
@@ -25,8 +25,7 @@ class Formals {
     }
 
     void execute() {
-        listFormal.add(id.getString());
-        id.executeRefAllocate(); //////////heap is not allocated 
+        listFormal.add(id);
         if (formals != null) {
             formals.execute();
         }

@@ -31,12 +31,13 @@ class FuncCall implements Stmt {
         System.out.println(");");
     }
 
-    public void execute() { // NOT SURE WHAT TO DO HERE
+    public void execute() { // NEEDS FIXING
         // Set up new frame
         Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
         HashMap<String, CoreVar> newScope = new HashMap<>();
-        for (String id : formals.listFormal) {
-            newScope.put(id, Executor.getStackOrStatic(id));
+        for (Id idFormal : formals.listFormal) {
+            idFormal.executeRefAllocate();
+            newScope.put(idFormal.getString(), Executor.getStackOrStatic(idFormal.getString()));
         }
         // Push frame onto stack of stack
         newFrame.add(newScope);
