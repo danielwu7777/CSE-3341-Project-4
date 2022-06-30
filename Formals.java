@@ -26,7 +26,7 @@ class Formals {
 
     void execute() {
         listFormal.add(id.getString());
-        id.executeRefAllocate();
+        id.executeRefAllocate(); //////////heap is not allocated 
         if (formals != null) {
             formals.execute();
         }

@@ -1,1 +1,3 @@
-ERROR: invalid heap write attempted!
+{r=CoreVar@2a139a55, x=CoreVar@15db9742}
+[null]
+4

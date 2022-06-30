@@ -33,23 +33,18 @@ class FuncCall implements Stmt {
 
     public void execute() { // NOT SURE WHAT TO DO HERE
         // Set up new frame
-        // Create a stack of maps
         Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
-        // add a map to newly created stack of maps
         HashMap<String, CoreVar> newScope = new HashMap<>();
-        // create the formal parameters, copying the values of the arguments (use list from Formals)
         for (String id : formals.listFormal) {
-            newScope.put(id, /* TODO */);
+            newScope.put(id, Executor.getStackOrStatic(id));
         }
-        
-        // push fram onto the top of stack of stack of maps
-
-        // execute body of function
-
-        // pop frame off call stack
-        Executor.pushStackSpace();
+        // Push frame onto stack of stack
+        newFrame.add(newScope);
+        Executor.stackSpace.add(newFrame);
+        // Execute stmt-seq
         FuncDecl fd = Executor.functionMap.get(id.getString());
-        fd.execute();
+        fd.ss.execute();
+        // Pop frame off stack of stack
         Executor.popStackSpace();
     }
 }

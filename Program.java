@@ -33,8 +33,10 @@ class Program {
 		if (ds != null) {
 			ds.execute();
 		}
+		Executor.pushStackSpace();
 		Executor.pushLocalScope();
 		ss.execute();
 		Executor.popLocalScope();
+		Executor.popStackSpace();
 	}
 }

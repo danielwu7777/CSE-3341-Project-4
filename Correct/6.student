@@ -1,1 +1,8 @@
-ERROR: invalid heap write attempted!
+[null, null]
+[1, null]
+[1, 1, null]
+[1, 1, 5, null]
+[1, 1, 5, 5]
+[0, 1, 5, 5]
+0
+0

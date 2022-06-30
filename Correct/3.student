@@ -1,1 +1,7 @@
+{a=CoreVar@2a139a55, b=CoreVar@15db9742}
+[null, null]
+{a=CoreVar@2a139a55, b=CoreVar@15db9742}
+[1, null]
+{a=CoreVar@2a139a55, b=CoreVar@15db9742}
+[1, 2]
 ERROR: invalid heap read attempted!

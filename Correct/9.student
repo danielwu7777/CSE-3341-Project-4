@@ -1,18 +1,2 @@
-program
-		int x;
-	A(ref r) {
-	if r<9 then {
-		x=input();
-		r=x;
-		begin A(r);
-	}
-}
-begin
-	x=input();
-	ref y;
-	y=new class;
-	y=x;
-	begin A(y);
-	output(y);
-end
-0
+[null]
+ERROR: invalid heap read attempted!

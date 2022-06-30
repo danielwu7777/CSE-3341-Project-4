@@ -80,7 +80,7 @@ class Executor {
 
 	static CoreVar getStackOrStatic(String identifier) {
 		CoreVar record = null;
-		for (int i = stackSpace.size() - 1; i >= 0; i--) {
+		for (int i = stackSpace.peek().size() - 1; i >= 0; i--) {
 			if (stackSpace.peek().get(i).containsKey(identifier)) {
 				record = stackSpace.peek().get(i).get(identifier);
 				break;
