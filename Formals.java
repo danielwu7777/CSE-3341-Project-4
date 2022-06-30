@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Formals {
     Id id;
     Formals formals;
+    List<String> listFormal = new ArrayList<String>();
 
     void parse() {
         id = new Id();
@@ -21,10 +25,10 @@ class Formals {
     }
 
     void execute() {
+        listFormal.add(id.getString());
         id.executeRefAllocate();
         if (formals != null) {
             formals.execute();
         }
     }
-
 }

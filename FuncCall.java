@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Stack;
+
 class FuncCall implements Stmt {
     Id id;
     Formals formals;
@@ -30,11 +33,17 @@ class FuncCall implements Stmt {
 
     public void execute() { // NOT SURE WHAT TO DO HERE
         // Set up new frame
-            // Create a stack of maps
-            // add a map to newly created stack of maps
-            // create the formal parameters, copying the values of the arguments
-            // push fram onto the top of stack of stack of maps
+        // Create a stack of maps
+        Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
+        // add a map to newly created stack of maps
+        HashMap<String, CoreVar> newScope = new HashMap<>();
+        // create the formal parameters, copying the values of the arguments (use list from Formals)
+        for (String id : formals.listFormal) {
+            newScope.put(id, /* TODO */);
+        }
         
+        // push fram onto the top of stack of stack of maps
+
         // execute body of function
 
         // pop frame off call stack

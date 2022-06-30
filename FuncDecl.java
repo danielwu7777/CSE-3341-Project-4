@@ -31,10 +31,8 @@ class FuncDecl {
         System.out.println("}");
     }
 
-    void execute() { // NOT SURE IF CORRECT
-        Executor.functionMap.put("string", FuncDecl.this); // like this
-        id.executeRefAllocate();
+    void execute() {
+        Executor.functionMap.put(id.getString(), FuncDecl.this);
         formals.execute();
-        ss.execute();
     }
 }
