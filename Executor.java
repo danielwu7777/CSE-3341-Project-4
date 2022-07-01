@@ -28,7 +28,6 @@ class Executor {
 		stackSpace = new Stack<Stack<HashMap<String, CoreVar>>>();
 		heapSpace = new ArrayList<Integer>();
 		dataFile = new Scanner(dataFileName);
-		stackSpace = new Stack<Stack<HashMap<String, CoreVar>>>();
 		functionMap = new HashMap<String, FuncDecl>();
 	}
 
@@ -141,4 +140,17 @@ class Executor {
 		x.value = y.value;
 	}
 
+	static void pushFrame(List<String> formalList, List<String> actualList) {
+		// Set up new frame
+		Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
+		newFrame.add(new HashMap<String, CoreVar>());
+		for (int i = 0; i < formalList.size(); i++) {
+			CoreVar temp = new CoreVar(Core.REF);
+			temp.value = getStackOrStatic(formalList.get(i)).value;
+			newFrame.peek().put(actualList.get(i), temp);
+		}
+		// Push frame onto stack of stack
+		Executor.stackSpace.add(newFrame);
+		pushLocalScope();
+	}
 }

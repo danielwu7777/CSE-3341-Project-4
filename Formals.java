@@ -5,7 +5,6 @@ class Formals {
     Id id;
     Formals formals;
     List<String> listIdString = new ArrayList<>();
-    List<Id> listId = new ArrayList<>();
 
     void parse() {
         id = new Id();
@@ -25,17 +24,10 @@ class Formals {
         }
     }
 
-    void executeStringList() {
+    void execute() {
         listIdString.add(id.getString());
         if (formals != null) {
-            formals.executeStringList();
-        }
-    }
-
-    void executeIdList() {
-        listId.add(id);
-        if (formals != null) {
-            formals.executeIdList();
+            formals.execute();
         }
     }
 }
