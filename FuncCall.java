@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 class FuncCall implements Stmt {
@@ -32,10 +33,10 @@ class FuncCall implements Stmt {
     }
 
     public void execute() { ////////////////////////////////////////// NEEDS FIXING
-        formals.execute(); 
-        FuncDecl fd = Executor.functionMap.get(id.getString()); 
+        formals.execute();
+        FuncDecl fd = Executor.functionMap.get(id.getString());
         fd.formals.execute();
-        Executor.pushFrame(formals.listIdString, fd.formals.listIdString);
+        Executor.pushFrame(fd.formals.listIdString, formals.listIdString);
         // Execute stmt-seq
         fd.ss.execute();
         // Pop frame off stack of stack

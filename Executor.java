@@ -140,14 +140,14 @@ class Executor {
 		x.value = y.value;
 	}
 
-	static void pushFrame(List<String> formalList, List<String> actualList) {
+	static void pushFrame(List<String> formalParams, List<String> actualParams) {
 		// Set up new frame
 		Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
 		newFrame.add(new HashMap<String, CoreVar>());
-		for (int i = 0; i < formalList.size(); i++) {
+		for (int i = 0; i < formalParams.size(); i++) {
 			CoreVar temp = new CoreVar(Core.REF);
-			temp.value = getStackOrStatic(formalList.get(i)).value;
-			newFrame.peek().put(actualList.get(i), temp);
+			temp.value = getStackOrStatic(actualParams.get(i)).value;
+			newFrame.peek().put(formalParams.get(i), temp);
 		}
 		// Push frame onto stack of stack
 		Executor.stackSpace.add(newFrame);
