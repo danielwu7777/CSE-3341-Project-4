@@ -33,6 +33,5 @@ class FuncDecl {
 
     void execute() {
         Executor.functionMap.put(id.getString(), FuncDecl.this);
-        formals.execute();
     }
 }

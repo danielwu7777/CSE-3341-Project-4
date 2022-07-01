@@ -31,19 +31,27 @@ class FuncCall implements Stmt {
         System.out.println(");");
     }
 
-    public void execute() { // NEEDS FIXING
+    public void execute() { ////////////////////////////////////////// NEEDS FIXING
+        formals.executeStringList();
+        FuncDecl fd = Executor.functionMap.get(id.getString());
+        fd.formals.executeIdList();
+        System.out.println(formals.listIdString + " list id string"); ///////////not expected
+        System.out.println(fd.formals.listId + " list id of fd");
         // Set up new frame
         Stack<HashMap<String, CoreVar>> newFrame = new Stack<>();
         HashMap<String, CoreVar> newScope = new HashMap<>();
-        for (Id idFormal : formals.listFormal) {
-            idFormal.executeRefAllocate();
-            newScope.put(idFormal.getString(), Executor.getStackOrStatic(idFormal.getString()));
+        // Copy values from FuncCall formals to FuncDecl formals and add to newScope
+        int counter = 0;
+        for (Id i : fd.formals.listId) {
+            i.executeRefAllocate();
+            Executor.referenceCopy(i.getString(), formals.listIdString.get(counter));
+            newScope.put(i.getString(), Executor.getStackOrStatic(i.getString()));
+            counter++;
         }
         // Push frame onto stack of stack
         newFrame.add(newScope);
         Executor.stackSpace.add(newFrame);
         // Execute stmt-seq
-        FuncDecl fd = Executor.functionMap.get(id.getString());
         fd.ss.execute();
         // Pop frame off stack of stack
         Executor.popStackSpace();
