@@ -18,7 +18,7 @@ class StmtSeq {
 		} else if (Parser.scanner.currentToken() == Core.BEGIN) {
 			stmt = new FuncCall();
 		} else {
-			System.out.println("ERROR: Bad start to statement: " + Parser.scanner.currentToken());
+			System.out.println("ERROR: Bad start to statement: " + Parser.scanner.currentToken() + ". Also, function declarations must have bodies");
 			System.exit(0);
 		}
 		stmt.parse();

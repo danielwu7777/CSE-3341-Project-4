@@ -4,7 +4,7 @@ import java.util.List;
 class Formals {
     Id id;
     Formals formals;
-    List<String> listIdString = new ArrayList<>();
+    static List<String> listIdString = new ArrayList<>();
 
     void parse() {
         id = new Id();

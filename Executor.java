@@ -31,6 +31,37 @@ class Executor {
 		functionMap = new HashMap<String, FuncDecl>();
 	}
 
+	static void semanticUniqueFuncName(String funcName) {
+		if (Executor.functionMap.containsKey(funcName)) {
+			System.out.println("ERROR: No duplicate function names allowed");
+			System.exit(0);
+		}
+	}
+
+	static void semanticValidFuncName(FuncDecl fd) {
+		if (fd == null) {
+			System.out.println("ERROR: Function call has no target");
+			System.exit(0);
+		}
+	}
+
+	static void semanticValidNumArg(List<String> formalParams, List<String> actualParams) {
+		if (formalParams.size() != actualParams.size()) {
+			System.out.println("ERROR: Invalid number of arguments in function call");
+			System.exit(0);
+		}
+	}
+
+	static void semanticDistinctParams(List<String> formalParams) {
+		Set<String> helperSet = new HashSet<>();
+		for (String param : formalParams) {
+			if (!helperSet.add(param)) {
+				System.out.println("ERROR: Formal parameters of a function must be distinct from each other");
+				System.exit(0);
+			}
+		}
+	}
+
 	static void addFunction(String funcName, FuncDecl funcDecl) {
 		functionMap.put(funcName, funcDecl);
 	}
@@ -153,4 +184,11 @@ class Executor {
 		Executor.stackSpace.add(newFrame);
 		pushLocalScope();
 	}
+
+	static void copyList(List<String> from, List<String> to) {
+		for (String id : from) {
+			to.add(id);
+		}
+	}
+
 }

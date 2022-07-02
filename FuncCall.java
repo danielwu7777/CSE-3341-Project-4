@@ -1,6 +1,5 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 class FuncCall implements Stmt {
     Id id;
@@ -32,11 +31,21 @@ class FuncCall implements Stmt {
         System.out.println(");");
     }
 
-    public void execute() { ////////////////////////////////////////// NEEDS FIXING
+    public void execute() {
+        Formals.listIdString.clear();
         formals.execute();
+        List<String> actualParams = new ArrayList<>();
+        Executor.copyList(Formals.listIdString, actualParams);
+        Formals.listIdString.clear();
         FuncDecl fd = Executor.functionMap.get(id.getString());
+        Executor.semanticValidFuncName(fd);
         fd.formals.execute();
-        Executor.pushFrame(fd.formals.listIdString, formals.listIdString);
+        List<String> formalParams = new ArrayList<>();
+        Executor.copyList(Formals.listIdString, formalParams);
+        Executor.semanticDistinctParams(formalParams);
+        Formals.listIdString.clear();
+        Executor.semanticValidNumArg(formalParams, actualParams);
+        Executor.pushFrame(formalParams, actualParams);
         // Execute stmt-seq
         fd.ss.execute();
         // Pop frame off stack of stack
